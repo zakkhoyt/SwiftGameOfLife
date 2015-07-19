@@ -14,6 +14,8 @@ final class Generation: NSObject {
     private var width: Int
     private var height: Int
     private var livingCells: Set<Cell>
+    
+
 
     // MARK: public methods
     init(width: Int, height: Int, livingCells: Set<Cell>) {

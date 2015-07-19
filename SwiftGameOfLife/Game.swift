@@ -10,10 +10,16 @@ import UIKit
 
 class Game: NSObject {
 
+    // Mark Public member vars
+    var renderGenerationHandler:((Generation)->Void)?
+    
+    // MARK: Private member vars
     let width: Int
     let height: Int
-    let currentGeneration: Generation
+    var currentGeneration: Generation
     var nextGeneration: Generation? = nil
+    
+    
     
     init(width: Int, height: Int, currentGeneration: Generation){
         self.width = width
@@ -22,6 +28,18 @@ class Game: NSObject {
         super.init()
     }
     
-    
-    
+    func start(){
+        
+        // Control how many generations we are rendering
+        for _: Int in 0...100 {
+            // Process the currentGen into the next Gen
+            currentGeneration = currentGeneration.processGeneration()
+            
+            
+            // Let listener know it's time to render
+            if let handler = renderGenerationHandler {
+                handler(currentGeneration)
+            }
+        }
+    }
 }
