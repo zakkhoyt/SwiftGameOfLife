@@ -11,10 +11,16 @@ import UIKit
 final class Cell: NSObject {
     
     // MARK: Private memeber variables
-    private var x: Int
-    private var y: Int
-    private var age: Int
+    var x: Int
+    var y: Int
+    var age: Int
+
     
+    // Mark: Public class methods
+    class func key(x: Int, y: Int) -> String {
+        return "x:\(x) y:\(y)"
+    }
+
     // MARK: Public methods
     init(x: Int, y: Int){
         self.x = x
@@ -36,9 +42,5 @@ final class Cell: NSObject {
     
     func cellDescription() -> String {
         return "x:\(x) y:\(y) age:\(age)"
-    }
-    
-    func key() -> String {
-        return "x:\(x) y:\(y)"
     }
 }

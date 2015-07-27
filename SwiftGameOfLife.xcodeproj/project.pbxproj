@@ -202,6 +202,7 @@
 		CF55F4921B5C4A4300149B89 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Zakk Hoyt";
 				TargetAttributes = {
@@ -503,6 +504,7 @@
 				CF55F4C81B5C4A4300149B89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF55F4C91B5C4A4300149B89 /* Build configuration list for PBXNativeTarget "SwiftGameOfLifeTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +513,7 @@
 				CF55F4CB1B5C4A4300149B89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF55F4CC1B5C4A4300149B89 /* Build configuration list for PBXNativeTarget "SwiftGameOfLifeUITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +522,7 @@
 				CF55F4CE1B5C4A4300149B89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
