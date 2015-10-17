@@ -46,6 +46,9 @@
                                                                     <rect key="frame" x="273" y="7" width="39" height="30"/>
                                                                     <animations/>
                                                                     <state key="normal" title="Begin"/>
+                                                                    <connections>
+                                                                        <action selector="startButtonTouchUpInside:" destination="BV1-FR-VrT" eventType="touchUpInside" id="A22-km-iyu"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEg-9U-oey">
                                                                     <rect key="frame" x="544" y="7" width="32" height="30"/>
@@ -111,22 +114,23 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WV7-ay-2L2"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="settingsBottomConstraint" destination="fL1-Y7-JIV" id="dGT-7I-9db"/>
                         <outlet property="settingsView" destination="JM1-XH-SZY" id="Jqo-qy-jDq"/>
                         <outlet property="showButton" destination="BOt-iH-i8Q" id="hPS-Wg-Amn"/>
                         <outlet property="showButtonBottomLayoutConstraint" destination="DJ2-d6-qCv" id="j7b-m5-auo"/>
-                        <segue destination="Fa0-m2-djb" kind="show" id="D7e-RU-C69"/>
+                        <segue destination="Fa0-m2-djb" kind="show" identifier="SegueSetupToGame" id="D7e-RU-C69"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1377" y="510"/>
         </scene>
-        <!--Generation View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="uht-uE-kBk">
             <objects>
-                <viewController storyboardIdentifier="GenerationViewController" id="Fa0-m2-djb" customClass="GenerationViewController" customModule="SwiftGameOfLife" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" id="Fa0-m2-djb" customClass="GameViewController" customModule="SwiftGameOfLife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="haP-wx-aEA"/>
                         <viewControllerLayoutGuide type="bottom" id="d3N-w1-6yC"/>
@@ -145,8 +149,9 @@
         <!--Navigation Controller-->
         <scene sceneID="jtj-Ek-OQb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1N0-fe-9Ah" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="1N0-fe-9Ah" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KrT-oE-KH8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -162,4 +167,5 @@
             <point key="canvasLocation" x="565" y="510"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
