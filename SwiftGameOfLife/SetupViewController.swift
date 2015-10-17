@@ -11,7 +11,6 @@ import SpriteKit
 
 class SetupViewController: SpriteViewController {
 
-    
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var settingsBottomConstraint: NSLayoutConstraint!
     
@@ -39,6 +38,7 @@ class SetupViewController: SpriteViewController {
         showButtonBottomLayoutConstraint.constant = 8
         UIView.animateWithDuration(0.3) { () -> Void in
             self.view.layoutIfNeeded()
+            
         }
     }
     

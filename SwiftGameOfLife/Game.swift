@@ -14,14 +14,14 @@ class Game: NSObject {
     var renderGenerationHandler:((Generation)->Void)?
     
     // MARK: Private member vars
-    let width: Int
-    let height: Int
+    let width: UInt32
+    let height: UInt32
     var currentGeneration: Generation
     var nextGeneration: Generation? = nil
     
     
     
-    init(width: Int, height: Int, currentGeneration: Generation){
+    init(width: UInt32, height: UInt32, currentGeneration: Generation){
         self.width = width
         self.height = height
         self.currentGeneration = currentGeneration

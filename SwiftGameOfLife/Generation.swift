@@ -13,7 +13,7 @@ final class Generation: NSObject {
     // MARK: Private member variables
     private var width: Int
     private var height: Int
-    private var livingCells: Dictionary<String, Cell>
+    var livingCells: Dictionary<String, Cell>
     
     // MARK: public methods
     init(width: Int, height: Int, livingCells: Dictionary<String, Cell>) {

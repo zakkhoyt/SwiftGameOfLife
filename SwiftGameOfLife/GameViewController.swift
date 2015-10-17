@@ -11,16 +11,11 @@ import UIKit
 
 class GameViewController: SpriteViewController {
 
-    var game: Game? = nil {
-        didSet{
-            print("game has been passed")
-        }
-    }
-
+    var game: Game? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSpriteView()
+        gameScene?.game = game
     }
 
     override func didReceiveMemoryWarning() {

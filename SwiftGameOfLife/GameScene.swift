@@ -12,7 +12,8 @@ class GameScene: SKScene {
     
     var game: Game? = nil {
         didSet{
-            print("game has been passed")
+            xCells = (game?.width)!
+            yCells = (game?.height)!
         }
     }
     
@@ -20,21 +21,22 @@ class GameScene: SKScene {
         didSet{
             yCells = UInt32(CGFloat(xCells) * self.frame.size.height / self.frame.size.width)
             print("x: \(xCells) y: \(yCells))")
-            drawGrid()
+            drawScene()
         }
     }
     var yCells: UInt32 = 1
     
-    var gridLines: [SKNode] = []
+    var gridLineNodes: [SKNode] = []
+    var cellNodes: [SKNode] = []
 
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-        
-        self.addChild(myLabel)
+//        /* Setup your scene here */
+//        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+//        myLabel.text = "Hello, World!";
+//        myLabel.fontSize = 65;
+//        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+//        
+//        self.addChild(myLabel)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -61,15 +63,24 @@ class GameScene: SKScene {
         /* Called before each frame is rendered */
     }
     
-    
-    func drawGrid() {
-        for gridLine in gridLines{
+    func drawScene() {
+        for gridLine in gridLineNodes{
             gridLine.removeFromParent()
         }
+
+        for cellNode in cellNodes{
+            cellNode.removeFromParent()
+        }
+
+        drawCells()
+        drawGrid()
+    }
+    
+    
+    func drawGrid() {
         
-        let xSpacing: CGFloat = CGFloat(frame.size.width / CGFloat(xCells))
+        
         let ySpacing: CGFloat = CGFloat(frame.size.height / CGFloat(yCells))
-        
         for y in 0...yCells{
             let path = CGPathCreateMutable()
             CGPathMoveToPoint(path, nil, 0, CGFloat(y) * ySpacing)
@@ -77,9 +88,10 @@ class GameScene: SKScene {
             let line = SKShapeNode(path: path)
             line.strokeColor = UIColor.greenColor()
             self.addChild(line)
-            gridLines.append(line)
+            gridLineNodes.append(line)
         }
         
+        let xSpacing: CGFloat = CGFloat(frame.size.width / CGFloat(xCells))
         for x in 0...xCells{
             let path = CGPathCreateMutable()
             CGPathMoveToPoint(path, nil, CGFloat(x) * xSpacing, 0)
@@ -87,7 +99,25 @@ class GameScene: SKScene {
             let line = SKShapeNode(path: path)
             line.strokeColor = UIColor.greenColor()
             self.addChild(line)
-            gridLines.append(line)
+            gridLineNodes.append(line)
+        }
+    }
+    
+    func drawCells(){
+        let ySpacing: CGFloat = CGFloat(frame.size.height / CGFloat(yCells))
+        let xSpacing: CGFloat = CGFloat(frame.size.width / CGFloat(xCells))
+        for cell: Cell in (game?.currentGeneration.livingCells)!.values {
+            let path = CGPathCreateMutable()
+            CGPathMoveToPoint(path, nil, CGFloat(cell.x) * xSpacing, CGFloat(cell.y) * ySpacing)
+            CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing + xSpacing, CGFloat(cell.y) * ySpacing)
+            CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing + xSpacing, CGFloat(cell.y) * ySpacing + ySpacing)
+            CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing, CGFloat(cell.y) * ySpacing + ySpacing)
+            let cellNode = SKShapeNode(path: path)
+//            cellNode.strokeColor = UIColor.redColor()
+            cellNode.fillColor = UIColor.redColor()
+            self.addChild(cellNode)
+            cellNodes.append(cellNode)
+            
         }
     }
     
