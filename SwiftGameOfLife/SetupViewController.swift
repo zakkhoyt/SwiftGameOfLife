@@ -1,5 +1,5 @@
 //
-//  GameViewController.swift
+//  SetupViewController.swift
 //  SwiftGameOfLife
 //
 //  Created by Zakk Hoyt on 7/19/15.
@@ -9,12 +9,17 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class SetupViewController: UIViewController {
 
+    @IBOutlet weak var settingsView: UIView!
+    @IBOutlet weak var settingsBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var showButton: UIButton!
+    @IBOutlet weak var showButtonBottomLayoutConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let scene = GameScene(fileNamed:"GameScene") {
+        if let scene = SetupScene(fileNamed:"SetupScene") {
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true
@@ -50,4 +55,22 @@ class GameViewController: UIViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    // MARK - IBActions
+    @IBAction func hideButtonTouchUpInside(sender: AnyObject) {
+        settingsBottomConstraint.constant = -settingsView.bounds.size.height;
+        showButtonBottomLayoutConstraint.constant = 8
+        UIView.animateWithDuration(0.3) { () -> Void in
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func showButtonTouchUpInside(sender: AnyObject) {
+        settingsBottomConstraint.constant = 0
+        showButtonBottomLayoutConstraint.constant = -38
+        UIView.animateWithDuration(0.3) { () -> Void in
+            self.view.layoutIfNeeded()
+        }
+    }
+
 }

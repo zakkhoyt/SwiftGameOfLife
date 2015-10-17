@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  SetupScene.swift
 //  SwiftGameOfLife
 //
 //  Created by Zakk Hoyt on 7/19/15.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class SetupScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
