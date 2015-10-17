@@ -7,16 +7,16 @@
 //
 
 import UIKit
-import SpriteKit
 
-class GameViewController: UIViewController {
 
-    var skView: SKView? = nil
+class GameViewController: SpriteViewController {
+
     var game: Game? = nil {
         didSet{
             print("game has been passed")
         }
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +27,6 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    
     
     /*
     // MARK: - Navigation
@@ -42,17 +39,4 @@ class GameViewController: UIViewController {
     */
 
     
-    // MARK Private methods
-    func setupSpriteView(){
-        if(skView == nil){
-            skView = SKView(frame: view.bounds)
-            skView?.showsFPS = true
-            skView?.showsNodeCount = true
-            skView?.ignoresSiblingOrder = true
-            view.addSubview(self.skView!)
-            let scene = GameScene()
-            scene.scaleMode = .AspectFill
-            skView?.presentScene(scene)
-        }
-    }
 }

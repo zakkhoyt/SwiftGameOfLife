@@ -15,6 +15,17 @@ class GameScene: SKScene {
             print("game has been passed")
         }
     }
+    
+    var xCells: UInt32 = 1{
+        didSet{
+            yCells = UInt32(CGFloat(xCells) * self.frame.size.height / self.frame.size.width)
+            print("x: \(xCells) y: \(yCells))")
+            drawGrid()
+        }
+    }
+    var yCells: UInt32 = 1
+    
+    var gridLines: [SKNode] = []
 
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -49,4 +60,35 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+    
+    
+    func drawGrid() {
+        for gridLine in gridLines{
+            gridLine.removeFromParent()
+        }
+        
+        let xSpacing: CGFloat = CGFloat(frame.size.width / CGFloat(xCells))
+        let ySpacing: CGFloat = CGFloat(frame.size.height / CGFloat(yCells))
+        
+        for y in 0...yCells{
+            let path = CGPathCreateMutable()
+            CGPathMoveToPoint(path, nil, 0, CGFloat(y) * ySpacing)
+            CGPathAddLineToPoint(path, nil, frame.size.width, CGFloat(y) * ySpacing)
+            let line = SKShapeNode(path: path)
+            line.strokeColor = UIColor.greenColor()
+            self.addChild(line)
+            gridLines.append(line)
+        }
+        
+        for x in 0...xCells{
+            let path = CGPathCreateMutable()
+            CGPathMoveToPoint(path, nil, CGFloat(x) * xSpacing, 0)
+            CGPathAddLineToPoint(path, nil, CGFloat(x) * xSpacing, frame.size.height)
+            let line = SKShapeNode(path: path)
+            line.strokeColor = UIColor.greenColor()
+            self.addChild(line)
+            gridLines.append(line)
+        }
+    }
+    
 }

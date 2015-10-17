@@ -9,41 +9,21 @@
 import UIKit
 import SpriteKit
 
-class SetupViewController: UIViewController {
+class SetupViewController: SpriteViewController {
 
-    var skView: SKView? = nil
     
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var settingsBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var showButton: UIButton!
     @IBOutlet weak var showButtonBottomLayoutConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSpriteView()
+        view.bringSubviewToFront(settingsView)
+        view.bringSubviewToFront(showButton)
     }
 
-    override func shouldAutorotate() -> Bool {
-        return true
-    }
-
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .AllButUpsideDown
-        } else {
-            return .All
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
-
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "SegueSetupToGame"){
             let vc = segue.destinationViewController as? GameViewController
@@ -52,21 +32,6 @@ class SetupViewController: UIViewController {
     }
     
     // MARK Private methods
-    func setupSpriteView(){
-        if(skView == nil){
-            skView = SKView(frame: view.bounds)
-            skView?.showsFPS = true
-            skView?.showsNodeCount = true
-            skView?.ignoresSiblingOrder = true
-            view.addSubview(self.skView!)
-            let scene = GameScene()
-            scene.scaleMode = .AspectFill
-            skView?.presentScene(scene)
-            view.bringSubviewToFront(settingsView)
-            view.bringSubviewToFront(showButton)
-        }
-    }
-
     
     // MARK - IBActions
     @IBAction func hideButtonTouchUpInside(sender: AnyObject) {
@@ -99,5 +64,9 @@ class SetupViewController: UIViewController {
         let game = Game(width: 5, height: 5, currentGeneration: generation)
         
         performSegueWithIdentifier("SegueSetupToGame", sender: game)
+    }
+    
+    @IBAction func densitySliderValueChanged(sender: UISlider) {
+        self.gameScene?.xCells = UInt32(sender.value)
     }
 }
