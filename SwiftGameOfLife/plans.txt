@@ -1,0 +1,31 @@
+
+
+* GOL
+    * Define board size
+    * Define starting cells
+    * Define gen speed
+
+* GOL graphics
+    * Define color scheme
+    * Define look of cells (animations, sprites)
+    * Zoomable
+
+
+* iCloud
+    * Users can save their starting gen
+    * Users can laod other people's starting gens
+    * Users can flag gens as inappropriate
+
+* GameCenter?
+
+
+* Other ideas
+    * Export game as video
+
+
+
+* MVP
+    * Define level size
+    * Select staring cells (with touch)
+    * Render using spritekit
+    * Save/Load games
