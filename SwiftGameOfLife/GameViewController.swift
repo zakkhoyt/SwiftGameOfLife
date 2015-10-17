@@ -1,5 +1,5 @@
 //
-//  GenerationViewController.swift
+//  GameViewController.swift
 //  SwiftGameOfLife
 //
 //  Created by Zakk Hoyt on 10/17/15.
@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import SpriteKit
 
-class GenerationViewController: UIViewController {
+class GameViewController: UIViewController {
 
+    var skView: SKView? = nil
+    var game: Game? = nil {
+        didSet{
+            print("game has been passed")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupSpriteView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +29,8 @@ class GenerationViewController: UIViewController {
     }
     
 
+    
+    
     /*
     // MARK: - Navigation
 
@@ -32,4 +41,18 @@ class GenerationViewController: UIViewController {
     }
     */
 
+    
+    // MARK Private methods
+    func setupSpriteView(){
+        if(skView == nil){
+            skView = SKView(frame: view.bounds)
+            skView?.showsFPS = true
+            skView?.showsNodeCount = true
+            skView?.ignoresSiblingOrder = true
+            view.addSubview(self.skView!)
+            let scene = GameScene()
+            scene.scaleMode = .AspectFill
+            skView?.presentScene(scene)
+        }
+    }
 }

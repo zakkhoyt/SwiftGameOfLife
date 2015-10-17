@@ -11,6 +11,8 @@ import SpriteKit
 
 class SetupViewController: UIViewController {
 
+    var skView: SKView? = nil
+    
     @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var settingsBottomConstraint: NSLayoutConstraint!
     
@@ -18,21 +20,7 @@ class SetupViewController: UIViewController {
     @IBOutlet weak var showButtonBottomLayoutConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let scene = SetupScene(fileNamed:"SetupScene") {
-            // Configure the view.
-            let skView = self.view as! SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
-            
-            skView.presentScene(scene)
-        }
+        setupSpriteView()
     }
 
     override func shouldAutorotate() -> Bool {
@@ -56,6 +44,30 @@ class SetupViewController: UIViewController {
         return true
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "SegueSetupToGame"){
+            let vc = segue.destinationViewController as? GameViewController
+            vc?.game = sender as? Game
+        }
+    }
+    
+    // MARK Private methods
+    func setupSpriteView(){
+        if(skView == nil){
+            skView = SKView(frame: view.bounds)
+            skView?.showsFPS = true
+            skView?.showsNodeCount = true
+            skView?.ignoresSiblingOrder = true
+            view.addSubview(self.skView!)
+            let scene = GameScene()
+            scene.scaleMode = .AspectFill
+            skView?.presentScene(scene)
+            view.bringSubviewToFront(settingsView)
+            view.bringSubviewToFront(showButton)
+        }
+    }
+
+    
     // MARK - IBActions
     @IBAction func hideButtonTouchUpInside(sender: AnyObject) {
         settingsBottomConstraint.constant = -settingsView.bounds.size.height;
@@ -73,4 +85,19 @@ class SetupViewController: UIViewController {
         }
     }
 
+    @IBAction func startButtonTouchUpInside(sender: AnyObject) {
+        
+        // draw a vertical line
+        var cells = Dictionary<String, Cell>()
+        let cell0 = Cell(x: 1, y: 1);
+        let cell1 = Cell(x: 1, y: 2);
+        let cell2 = Cell(x: 1, y: 3);
+        cells[cell0.key()] = cell0
+        cells[cell1.key()] = cell1
+        cells[cell2.key()] = cell2
+        let generation = Generation(width: 5, height: 5, livingCells: cells)
+        let game = Game(width: 5, height: 5, currentGeneration: generation)
+        
+        performSegueWithIdentifier("SegueSetupToGame", sender: game)
+    }
 }

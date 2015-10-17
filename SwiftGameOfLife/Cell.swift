@@ -17,7 +17,7 @@ final class Cell: NSObject {
 
     
     // Mark: Public class methods
-    class func key(x: Int, y: Int) -> String {
+    class func keyFor(x: Int, y: Int) -> String {
         return "x:\(x) y:\(y)"
     }
 
@@ -25,7 +25,7 @@ final class Cell: NSObject {
     init(x: Int, y: Int){
         self.x = x
         self.y = y
-        self.age = 0
+        self.age = 1
         super.init()
     }
 
@@ -39,6 +39,11 @@ final class Cell: NSObject {
             return UIColor.clearColor()
         }
     }
+    
+    func key() -> String {
+        return "x:\(x) y:\(y)"
+    }
+
     
     func cellDescription() -> String {
         return "x:\(x) y:\(y) age:\(age)"

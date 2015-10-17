@@ -27,7 +27,7 @@ final class Generation: NSObject {
         let nextGen = Generation(width: width, height: height, livingCells: Dictionary())
         for x in 0..<width {
             for y in 0..<height {
-                let key = Cell.key(x, y: y)
+                let key = Cell.keyFor(x, y: y)
                 let livingCell = livingCells[key]
                 if livingCell != nil {
                     // Cell is alive. Check if it should die
@@ -89,7 +89,7 @@ final class Generation: NSObject {
         default:
             return nil
         }
-        let key = Cell.key(x, y: y)
+        let key = Cell.keyFor(x, y: y)
         let cell = livingCells[key]
         return cell
     }

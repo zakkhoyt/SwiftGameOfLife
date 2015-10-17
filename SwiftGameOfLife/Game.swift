@@ -42,4 +42,8 @@ class Game: NSObject {
             }
         }
     }
+    
+    func stop(){
+        
+    }
 }
