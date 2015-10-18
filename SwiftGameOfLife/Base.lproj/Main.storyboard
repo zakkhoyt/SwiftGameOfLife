@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="15A263e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1N0-fe-9Ah">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="15A263e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VsV-sF-VHR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
@@ -123,12 +123,79 @@
                         <outlet property="settingsView" destination="JM1-XH-SZY" id="Jqo-qy-jDq"/>
                         <outlet property="showButton" destination="BOt-iH-i8Q" id="hPS-Wg-Amn"/>
                         <outlet property="showButtonBottomLayoutConstraint" destination="DJ2-d6-qCv" id="j7b-m5-auo"/>
-                        <segue destination="Fa0-m2-djb" kind="show" identifier="SegueSetupToGame" id="D7e-RU-C69"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1377" y="510"/>
+            <point key="canvasLocation" x="2076" y="1248"/>
+        </scene>
+        <!--Games-->
+        <scene sceneID="I2Z-TJ-HuB">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="4IM-Gh-NHj" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="OUq-vI-X7d">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bg1-tj-1p2">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bg1-tj-1p2" id="UYe-TZ-rkV">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="4IM-Gh-NHj" id="3Fe-Uk-aJo"/>
+                            <outlet property="delegate" destination="4IM-Gh-NHj" id="UzF-HO-r4N"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Games" id="5cr-rv-UVD">
+                        <barButtonItem key="rightBarButtonItem" title="+" id="cHu-hm-yuc">
+                            <connections>
+                                <segue destination="BV1-FR-VrT" kind="show" id="iF5-qn-kYl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7j7-0d-BXb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1368" y="1248"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="n8J-SL-DFW">
+            <objects>
+                <navigationController id="Vnj-qT-Wgn" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fTX-mf-sxQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="4IM-Gh-NHj" kind="relationship" relationship="rootViewController" id="Ihh-ug-otc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lTN-ar-zMw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="548" y="1248"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="nyG-xC-2lK">
+            <objects>
+                <splitViewController id="VsV-sF-VHR" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="Vnj-qT-Wgn" kind="relationship" relationship="masterViewController" id="enp-UI-Cie"/>
+                        <segue destination="zNW-Gc-OEx" kind="relationship" relationship="detailViewController" id="nwC-Q3-bBh"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ueC-5c-RSi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-272" y="1579"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="uht-uE-kBk">
@@ -141,33 +208,50 @@
                     <view key="view" contentMode="scaleToFill" id="hnR-pF-q5v">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQm-Qy-waQ">
+                                <rect key="frame" x="570" y="570" width="30" height="30"/>
+                                <animations/>
+                                <state key="normal" title="E"/>
+                                <connections>
+                                    <action selector="evolveButtonTouchUpInside:" destination="Fa0-m2-djb" eventType="touchUpInside" id="xgH-Gd-wH4"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dQm-Qy-waQ" secondAttribute="trailing" id="RIp-hK-QeO"/>
+                            <constraint firstItem="d3N-w1-6yC" firstAttribute="top" secondItem="dQm-Qy-waQ" secondAttribute="bottom" id="eML-Fj-B8b"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ciT-zd-0Sh"/>
+                    <connections>
+                        <outlet property="evolveButton" destination="dQm-Qy-waQ" id="aIf-Ke-RiS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uu1-iC-dOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2272" y="510"/>
+            <point key="canvasLocation" x="1360" y="1961"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="jtj-Ek-OQb">
+        <scene sceneID="EY0-Va-ckl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="1N0-fe-9Ah" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zNW-Gc-OEx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KrT-oE-KH8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2rx-vY-CiX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BV1-FR-VrT" kind="relationship" relationship="rootViewController" id="tXo-gk-ugO"/>
+                        <segue destination="Fa0-m2-djb" kind="relationship" relationship="rootViewController" id="ePm-x2-aAP"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EeN-nq-Jh6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OZ7-GY-kzU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="565" y="510"/>
+            <point key="canvasLocation" x="548" y="1961"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

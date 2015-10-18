@@ -50,7 +50,7 @@ final class Generation: NSObject {
             }
             
         }
-        return self;
+        return nextGen;
     }
     
     func printGeneration(){
@@ -95,6 +95,7 @@ final class Generation: NSObject {
     }
     
     private func passesRule1(cell: Cell) -> Bool {
+        
         return false
     }
     
