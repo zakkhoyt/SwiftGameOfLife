@@ -14,36 +14,50 @@ class Game: NSObject {
     var renderGenerationHandler:((Generation)->Void)?
     
     // MARK: Private member vars
-    let width: UInt32
-    let height: UInt32
+    let width: UInt
+    let height: UInt
     var currentGeneration: Generation
     var nextGeneration: Generation? = nil
+    var generationCounter: UInt = 0
+    var abort: Bool = false
     
     
-    
-    init(width: UInt32, height: UInt32, currentGeneration: Generation){
+    init(width: UInt, height: UInt, currentGeneration: Generation){
         self.width = width
         self.height = height
         self.currentGeneration = currentGeneration
+        self.generationCounter = 1
         super.init()
     }
     
-    func start(){
-        
-        // Control how many generations we are rendering
-        for _: Int in 0...100 {
-            // Process the currentGen into the next Gen
-            currentGeneration = currentGeneration.processGeneration()
-            
-            
-            // Let listener know it's time to render
-            if let handler = renderGenerationHandler {
-                handler(currentGeneration)
+    func startWithRenderHander(handler: ((Generation)->Void)){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            for _: Int in 0...100 {
+                if(self.abort == true){
+                    break
+                }
+                
+                // Process the currentGen into the next Gen
+                self.currentGeneration = self.currentGeneration.processGeneration()
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    handler(self.currentGeneration)
+                })
             }
         }
     }
     
     func stop(){
-        
+        abort = true
     }
+    
+    func evolveOnceWithRenderHander(handler: ((Generation)->Void)){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            // Process the currentGen into the next Gen
+            self.currentGeneration = self.currentGeneration.processGeneration()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                handler(self.currentGeneration)
+            })
+        }
+    }
+    
 }

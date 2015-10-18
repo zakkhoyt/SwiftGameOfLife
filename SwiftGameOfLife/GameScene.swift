@@ -17,14 +17,14 @@ class GameScene: SKScene {
         }
     }
     
-    var xCells: UInt32 = 1{
+    var xCells: UInt = 1{
         didSet{
-            yCells = UInt32(CGFloat(xCells) * self.frame.size.height / self.frame.size.width)
+            yCells = UInt(CGFloat(xCells) * self.frame.size.height / self.frame.size.width)
             print("x: \(xCells) y: \(yCells))")
             drawScene()
         }
     }
-    var yCells: UInt32 = 1
+    var yCells: UInt = 1
     
     var gridLineNodes: [SKNode] = []
     var cellNodes: [SKNode] = []
@@ -63,7 +63,7 @@ class GameScene: SKScene {
         /* Called before each frame is rendered */
     }
     
-    func drawScene() {
+    private func drawScene() {
         for gridLine in gridLineNodes{
             gridLine.removeFromParent()
         }
@@ -77,7 +77,7 @@ class GameScene: SKScene {
     }
     
     
-    func drawGrid() {
+    private func drawGrid() {
         
         
         let ySpacing: CGFloat = CGFloat(frame.size.height / CGFloat(yCells))
@@ -103,7 +103,7 @@ class GameScene: SKScene {
         }
     }
     
-    func drawCells(){
+    private func drawCells(){
         let ySpacing: CGFloat = CGFloat(frame.size.height / CGFloat(yCells))
         let xSpacing: CGFloat = CGFloat(frame.size.width / CGFloat(xCells))
         for cell: Cell in (game?.currentGeneration.livingCells)!.values {
@@ -113,7 +113,6 @@ class GameScene: SKScene {
             CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing + xSpacing, CGFloat(cell.y) * ySpacing + ySpacing)
             CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing, CGFloat(cell.y) * ySpacing + ySpacing)
             let cellNode = SKShapeNode(path: path)
-//            cellNode.strokeColor = UIColor.redColor()
             cellNode.fillColor = UIColor.redColor()
             self.addChild(cellNode)
             cellNodes.append(cellNode)

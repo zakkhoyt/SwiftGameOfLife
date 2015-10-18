@@ -50,7 +50,7 @@ final class Generation: NSObject {
             }
             
         }
-        return self;
+        return nextGen;
     }
     
     func printGeneration(){
@@ -94,19 +94,54 @@ final class Generation: NSObject {
         return cell
     }
     
+    
+    
+    private func getNeighboringCells(cell: Cell) -> [Cell] {
+        var neighbors = Array<Cell>()
+        for index in 0..<8 {
+            if let cell = getNeighborFromCell(cell, index: index){
+                neighbors.append(cell)
+            }
+        }
+        return neighbors;
+    }
+    
+    
+
+    // Any live cell with fewer than two live neighbours dies, as if by needs caused by underpopulation.
     private func passesRule1(cell: Cell) -> Bool {
+        let neighbors = getNeighboringCells(cell)
+        if neighbors.count < 2 {
+            return false
+        }
+        return true
+    }
+    
+    // Any live cell with more than three live neighbours dies, as if by overcrowding.
+    private func passesRule2(cell: Cell) -> Bool {
+        let neighbors = getNeighboringCells(cell)
+        if neighbors.count > 3 {
+            return false
+        }
+        return true
+
+    }
+
+    // Any live cell with two or three live neighbours lives, unchanged, to the next generation.
+    private func passesRule3(cell: Cell) -> Bool {
+        let neighbors = getNeighboringCells(cell)
+        if neighbors.count == 2 || neighbors.count == 3 {
+            return true
+        }
         return false
     }
     
-    private func passesRule2(cell: Cell) -> Bool {
-        return false
-    }
-
-    private func passesRule3(cell: Cell) -> Bool {
-        return false
-    }
-
+    // Any dead cell with exactly three live neighbours cells will come to life.
     private func passesRule4(cell: Cell) -> Bool {
+        let neighbors = getNeighboringCells(cell)
+        if neighbors.count == 3 {
+            return true
+        }
         return false
     }
 
