@@ -103,7 +103,11 @@ class GameScene: SKScene {
 
         // Draw new nodes
         drawCells()
-        drawGrid()
+        
+        // Draw grid lines
+        if game?.hideGrid == false {
+            drawGrid()
+        }
     }
     
     
@@ -138,6 +142,7 @@ class GameScene: SKScene {
         
         if game?.currentGeneration.livingCells.count > 0 {
             for cell: Cell in (game?.currentGeneration.livingCells)!.values {
+                // Make a rect and add a sprite to it
                 let path = CGPathCreateMutable()
                 CGPathMoveToPoint(path, nil, CGFloat(cell.x) * xSpacing, CGFloat(cell.y) * ySpacing)
                 CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing + xSpacing, CGFloat(cell.y) * ySpacing)
@@ -146,8 +151,27 @@ class GameScene: SKScene {
                 let cellNode = SKShapeNode(path: path)
                 cellNode.name = "cell " + cell.key()
                 cellNode.fillColor = UIColor.redColor()
+                cellNode.strokeColor = UIColor.cyanColor()
                 self.addChild(cellNode)
                 cellNodes.append(cellNode)
+                
+                let spriteNode = SKSpriteNode(imageNamed: "Spaceship")
+                spriteNode.position = CGPointMake(CGRectGetMidX(cellNode.frame), CGRectGetMidY(cellNode.frame))
+                spriteNode.size = CGSizeMake(xSpacing, ySpacing)
+                spriteNode.name = "cell " + cell.key()
+                //self.addChild(spriteNode)
+                cellNode.addChild(spriteNode)
+
+                
+                
+                
+                /* Draw just the spaceship node */
+//                let cellNode = SKSpriteNode(imageNamed: "Spaceship")
+//                cellNode.position = CGPointMake(CGFloat(cell.x) * xSpacing + xSpacing / 2.0, CGFloat(cell.y) * ySpacing + ySpacing / 2.0)
+//                cellNode.size = CGSizeMake(xSpacing, ySpacing)
+//                cellNode.name = "cell " + cell.key()
+//                self.addChild(cellNode)
+//                cellNodes.append(cellNode)
                 
             }
         }

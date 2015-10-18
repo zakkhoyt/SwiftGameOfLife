@@ -5,16 +5,21 @@
     * Select staring cells (with touch)
     * Render using spritekit
         * animations
+        * emitters
     * Single screen
     * Main controls
-        * x1
+        * Age label
+        * Density label/slider
+        * hide/show
+        * Evolve x1
         * start/stop
+            * speed
+
     * Setting controls
         * clear/seed
         * rule 5
         * colors
         * grid on/off
-
 
 * GOL
     * Define board size

@@ -29,12 +29,12 @@ class SetupViewController: SpriteViewController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "SegueSetupToGame"){
-            let vc = segue.destinationViewController as? GameViewController
-            vc?.game = sender as? Game
-        } else {
-            print("other segue")
-        }
+//        if(segue.identifier == "SegueSetupToGame"){
+//            let vc = segue.destinationViewController as? GameViewController
+//            vc?.game = sender as? Game
+//        } else {
+//            print("other segue")
+//        }
     }
     
     // MARK Private methods
@@ -82,10 +82,26 @@ class SetupViewController: SpriteViewController {
             self.view.layoutIfNeeded()
         }
     }
+    
+    @IBAction func plusPlusButtonTouchUpInside(sender: AnyObject) {
+        game?.evolveOnceWithRenderHander({ (currentGeneration: Generation) -> Void in
+            gameScene?.game = game
+            //            gameScene?.game = self.game
+            //            self.ageLabel.text = String(format: "%lu", arguments: game?.generationCounter)
+        })
+        
+        //        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+        //        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        //            game?.startWithRenderHander({ (currentGeneration: Generation) -> Void in
+        //                gameScene?.game = game
+        //            })
+        //        }
 
-    @IBAction func startButtonTouchUpInside(sender: AnyObject) {
-        performSegueWithIdentifier("SegueSetupToGame", sender: game)
     }
+
+//    @IBAction func startButtonTouchUpInside(sender: AnyObject) {
+//        performSegueWithIdentifier("SegueSetupToGame", sender: game)
+//    }
     
     @IBAction func densitySliderValueChanged(sender: UISlider) {
 //        self.gameScene?.xCells = UInt(sender.value)
