@@ -11,8 +11,6 @@
 		C6C0791B1BD2DD78007C01BA /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0791A1BD2DD78007C01BA /* GameViewController.swift */; };
 		CF2FECA71BD305ED00B81FCE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CF2FECA61BD305ED00B81FCE /* GameScene.sks */; };
 		CF2FECA91BD3065D00B81FCE /* SpriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2FECA81BD3065D00B81FCE /* SpriteViewController.swift */; };
-		CF2FECAC1BD3384E00B81FCE /* MasterDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2FECAB1BD3384E00B81FCE /* MasterDetail.storyboard */; };
-		CF2FECEA1BD33C4100B81FCE /* GamesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2FECE91BD33C4100B81FCE /* GamesTableViewController.swift */; };
 		CF55F49E1B5C4A4300149B89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55F49D1B5C4A4300149B89 /* AppDelegate.swift */; };
 		CF55F4A21B5C4A4300149B89 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55F4A11B5C4A4300149B89 /* GameScene.swift */; };
 		CF55F4A41B5C4A4300149B89 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55F4A31B5C4A4300149B89 /* SetupViewController.swift */; };
@@ -48,8 +46,6 @@
 		C6C0791A1BD2DD78007C01BA /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		CF2FECA61BD305ED00B81FCE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		CF2FECA81BD3065D00B81FCE /* SpriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteViewController.swift; sourceTree = "<group>"; };
-		CF2FECAB1BD3384E00B81FCE /* MasterDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MasterDetail.storyboard; sourceTree = "<group>"; };
-		CF2FECE91BD33C4100B81FCE /* GamesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesTableViewController.swift; sourceTree = "<group>"; };
 		CF55F49A1B5C4A4300149B89 /* SwiftGameOfLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGameOfLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF55F49D1B5C4A4300149B89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF55F4A11B5C4A4300149B89 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -100,7 +96,6 @@
 				CF55F4A81B5C4A4300149B89 /* Assets.xcassets */,
 				CF55F4AA1B5C4A4300149B89 /* LaunchScreen.storyboard */,
 				CF55F4A51B5C4A4300149B89 /* Main.storyboard */,
-				CF2FECAB1BD3384E00B81FCE /* MasterDetail.storyboard */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -171,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				C6C0791A1BD2DD78007C01BA /* GameViewController.swift */,
-				CF2FECE91BD33C4100B81FCE /* GamesTableViewController.swift */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -340,7 +334,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6C079171BD20886007C01BA /* plans.txt in Resources */,
-				CF2FECAC1BD3384E00B81FCE /* MasterDetail.storyboard in Resources */,
 				CF2FECA71BD305ED00B81FCE /* GameScene.sks in Resources */,
 				CF55F4AC1B5C4A4300149B89 /* LaunchScreen.storyboard in Resources */,
 				CF55F4A91B5C4A4300149B89 /* Assets.xcassets in Resources */,
@@ -373,7 +366,6 @@
 				CF55F4D41B5C4A7B00149B89 /* Game.swift in Sources */,
 				CF55F4D01B5C4A5A00149B89 /* Cell.swift in Sources */,
 				CF2FECA91BD3065D00B81FCE /* SpriteViewController.swift in Sources */,
-				CF2FECEA1BD33C4100B81FCE /* GamesTableViewController.swift in Sources */,
 				CF55F4A41B5C4A4300149B89 /* SetupViewController.swift in Sources */,
 				CF55F49E1B5C4A4300149B89 /* AppDelegate.swift in Sources */,
 				C6C0791B1BD2DD78007C01BA /* GameViewController.swift in Sources */,

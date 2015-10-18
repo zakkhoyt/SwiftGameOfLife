@@ -70,6 +70,6 @@ class SetupViewController: SpriteViewController {
     }
     
     @IBAction func densitySliderValueChanged(sender: UISlider) {
-        self.gameScene?.xCells = UInt32(sender.value)
+        self.gameScene?.xCells = UInt(sender.value)
     }
 }

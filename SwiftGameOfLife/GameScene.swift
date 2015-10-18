@@ -17,14 +17,14 @@ class GameScene: SKScene {
         }
     }
     
-    var xCells: UInt32 = 1{
+    var xCells: UInt = 1{
         didSet{
-            yCells = UInt32(CGFloat(xCells) * self.frame.size.height / self.frame.size.width)
+            yCells = UInt(CGFloat(xCells) * self.frame.size.height / self.frame.size.width)
             print("x: \(xCells) y: \(yCells))")
             drawScene()
         }
     }
-    var yCells: UInt32 = 1
+    var yCells: UInt = 1
     
     var gridLineNodes: [SKNode] = []
     var cellNodes: [SKNode] = []

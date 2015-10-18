@@ -142,25 +142,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQm-Qy-waQ">
-                                <rect key="frame" x="570" y="570" width="30" height="30"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hm3-Tg-ctq">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Izd-pz-5rs">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQm-Qy-waQ">
+                                            <rect key="frame" x="562" y="7" width="30" height="30"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="GBG-Rk-Km3"/>
+                                                <constraint firstAttribute="height" constant="30" id="gDP-Iy-6MS"/>
+                                            </constraints>
+                                            <state key="normal" title="E"/>
+                                            <connections>
+                                                <action selector="evolveButtonTouchUpInside:" destination="Fa0-m2-djb" eventType="touchUpInside" id="xgH-Gd-wH4"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3RR-mF-vky">
+                                            <rect key="frame" x="8" y="7" width="30" height="30"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="QUa-RC-SJW"/>
+                                                <constraint firstAttribute="height" constant="30" id="u6p-pb-a7w"/>
+                                            </constraints>
+                                            <state key="normal" title="B"/>
+                                            <connections>
+                                                <action selector="backButtonTouchUpInside:" destination="Fa0-m2-djb" eventType="touchUpInside" id="W3C-WY-exe"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHW-oC-xef">
+                                            <rect key="frame" x="46" y="11" width="508" height="21"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="3RR-mF-vky" firstAttribute="centerY" secondItem="Izd-pz-5rs" secondAttribute="centerY" id="C1M-CK-1T3"/>
+                                        <constraint firstItem="3RR-mF-vky" firstAttribute="leading" secondItem="Izd-pz-5rs" secondAttribute="leading" constant="8" id="Hzz-WZ-6CD"/>
+                                        <constraint firstItem="hHW-oC-xef" firstAttribute="leading" secondItem="3RR-mF-vky" secondAttribute="trailing" constant="8" id="OVA-qR-s9R"/>
+                                        <constraint firstItem="dQm-Qy-waQ" firstAttribute="centerY" secondItem="Izd-pz-5rs" secondAttribute="centerY" id="UAn-S5-CHp"/>
+                                        <constraint firstItem="3RR-mF-vky" firstAttribute="centerY" secondItem="Izd-pz-5rs" secondAttribute="centerY" id="YHs-9P-Qlw"/>
+                                        <constraint firstItem="hHW-oC-xef" firstAttribute="centerX" secondItem="Izd-pz-5rs" secondAttribute="centerX" id="eca-Fj-q2N"/>
+                                        <constraint firstItem="dQm-Qy-waQ" firstAttribute="leading" secondItem="hHW-oC-xef" secondAttribute="trailing" constant="8" id="hQv-Gx-KRg"/>
+                                        <constraint firstItem="hHW-oC-xef" firstAttribute="centerY" secondItem="Izd-pz-5rs" secondAttribute="centerY" id="wyX-08-6r6"/>
+                                        <constraint firstAttribute="trailing" secondItem="dQm-Qy-waQ" secondAttribute="trailing" constant="8" id="zRA-tL-ISN"/>
+                                    </constraints>
+                                </view>
                                 <animations/>
-                                <state key="normal" title="E"/>
-                                <connections>
-                                    <action selector="evolveButtonTouchUpInside:" destination="Fa0-m2-djb" eventType="touchUpInside" id="xgH-Gd-wH4"/>
-                                </connections>
-                            </button>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="2Ud-PT-JKG"/>
+                                </constraints>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="dQm-Qy-waQ" secondAttribute="trailing" id="RIp-hK-QeO"/>
-                            <constraint firstItem="d3N-w1-6yC" firstAttribute="top" secondItem="dQm-Qy-waQ" secondAttribute="bottom" id="eML-Fj-B8b"/>
+                            <constraint firstAttribute="trailing" secondItem="hm3-Tg-ctq" secondAttribute="trailing" id="6Me-fJ-lhu"/>
+                            <constraint firstItem="d3N-w1-6yC" firstAttribute="top" secondItem="hm3-Tg-ctq" secondAttribute="bottom" id="bBD-NX-D7f"/>
+                            <constraint firstItem="hm3-Tg-ctq" firstAttribute="leading" secondItem="hnR-pF-q5v" secondAttribute="leading" id="okX-bo-rSE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ciT-zd-0Sh"/>
                     <connections>
+                        <outlet property="ageLabel" destination="hHW-oC-xef" id="Z0O-AY-rzb"/>
                         <outlet property="evolveButton" destination="dQm-Qy-waQ" id="aIf-Ke-RiS"/>
+                        <outlet property="toolbarView" destination="hm3-Tg-ctq" id="K9B-Fw-4ca"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uu1-iC-dOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
