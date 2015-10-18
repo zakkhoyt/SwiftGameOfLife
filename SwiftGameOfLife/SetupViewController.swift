@@ -64,8 +64,21 @@ class SetupViewController: SpriteViewController {
         cells[cell0.key()] = cell0
         cells[cell1.key()] = cell1
         cells[cell2.key()] = cell2
-        let generation = Generation(width: 5, height: 5, livingCells: cells)
-        let game = Game(width: 5, height: 5, currentGeneration: generation)
+        
+        // A 2x2 square
+//        let cell0 = Cell(x: 1, y: 1);
+//        let cell1 = Cell(x: 1, y: 2);
+//        let cell2 = Cell(x: 2, y: 1);
+//        let cell3 = Cell(x: 2, y: 2);
+//        cells[cell0.key()] = cell0
+//        cells[cell1.key()] = cell1
+//        cells[cell2.key()] = cell2
+//        cells[cell3.key()] = cell3
+        
+        let width: UInt = 5
+        let height = UInt(CGFloat(width) * view.bounds.size.height / view.bounds.size.width)
+        let generation = Generation(width: width, height: height, livingCells: cells)
+        let game = Game(width: width, height: height, currentGeneration: generation)
         performSegueWithIdentifier("SegueSetupToGame", sender: game)
     }
     

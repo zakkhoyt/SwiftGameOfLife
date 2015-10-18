@@ -11,18 +11,18 @@ import UIKit
 final class Cell: NSObject {
     
     // MARK: Private memeber variables
-    var x: Int
-    var y: Int
-    var age: Int
+    var x: UInt
+    var y: UInt
+    var age: UInt
 
     
     // Mark: Public class methods
-    class func keyFor(x: Int, y: Int) -> String {
+    class func keyFor(x: UInt, y: UInt) -> String {
         return "x:\(x) y:\(y)"
     }
 
     // MARK: Public methods
-    init(x: Int, y: Int){
+    init(x: UInt, y: UInt){
         self.x = x
         self.y = y
         self.age = 1

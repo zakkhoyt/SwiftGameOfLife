@@ -11,12 +11,12 @@ import UIKit
 final class Generation: NSObject {
     
     // MARK: Private member variables
-    private var width: Int
-    private var height: Int
+    private var width: UInt
+    private var height: UInt
     var livingCells: Dictionary<String, Cell>
     
     // MARK: public methods
-    init(width: Int, height: Int, livingCells: Dictionary<String, Cell>) {
+    init(width: UInt, height: UInt, livingCells: Dictionary<String, Cell>) {
         self.width = width
         self.height = height
         self.livingCells = livingCells
@@ -59,8 +59,9 @@ final class Generation: NSObject {
 
     // MARK: private methods
     private func getNeighborFromCell(cell: Cell, index: Int) -> Cell? {
-        var x = cell.x
-        var y = cell.y
+        // We've got to cast to Int here in case we go off the shallow end
+        var x: Int = Int(cell.x)
+        var y: Int = Int(cell.y)
 
         // 0,1,2
         // 3,x,4
@@ -89,7 +90,12 @@ final class Generation: NSObject {
         default:
             return nil
         }
-        let key = Cell.keyFor(x, y: y)
+        
+        if x < 0 || y < 0 {
+            return nil
+        }
+        
+        let key = Cell.keyFor(UInt(x), y: UInt(y))
         let cell = livingCells[key]
         return cell
     }
