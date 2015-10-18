@@ -66,7 +66,7 @@ class SetupViewController: SpriteViewController {
         cells[cell2.key()] = cell2
         let generation = Generation(width: 5, height: 5, livingCells: cells)
         let game = Game(width: 5, height: 5, currentGeneration: generation)
-        setupCompletionHandler(game)
+        performSegueWithIdentifier("SegueSetupToGame", sender: game)
     }
     
     @IBAction func densitySliderValueChanged(sender: UISlider) {
