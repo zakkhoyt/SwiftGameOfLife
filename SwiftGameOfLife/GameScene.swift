@@ -57,6 +57,9 @@ class GameScene: SKScene {
                 let index = getCellIndexAtPoint(point)
                 // TODO: bring cell to life
                 print("no living cell found x:\(index.x) y:\(index.y)")
+                let cell = Cell(x: index.x, y: index.y)
+                game?.currentGeneration.livingCells[cell.key()] = cell
+                drawScene()
             }
         }
     }

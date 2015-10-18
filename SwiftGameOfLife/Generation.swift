@@ -31,8 +31,9 @@ final class Generation: NSObject {
                 let livingCell = livingCells[key]
                 if livingCell != nil {
                     // Cell is alive. Check if it should die
-                    if passesRule1(livingCell!) && passesRule2(livingCell!) && passesRule3(livingCell!) {
+                    if passesRule1(livingCell!) && passesRule2(livingCell!) && passesRule3(livingCell!)  && passesRule5(livingCell!) {
                         // Cell lives to next generation
+                        livingCell?.age++
                         nextGen.livingCells[key] = livingCell
                     } else {
                         // Cell dies
@@ -152,6 +153,9 @@ final class Generation: NSObject {
     }
 
     private func passesRule5(cell: Cell) -> Bool {
+        if cell.age < 10 {
+            return true
+        }
         return false
     }
     
