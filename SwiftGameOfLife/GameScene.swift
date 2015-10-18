@@ -49,7 +49,15 @@ class GameScene: SKScene {
                 if node.name?.containsString("cell") == true {
                     print("tapped living cell " + node.name!)
                     found = true
+                    
                     // TODO: kill cell
+                    let index = getCellIndexAtPoint(point)
+                    let key = Cell.keyFor(index.x, y: index.y)
+                    game?.currentGeneration.livingCells[key] = nil
+                    drawScene()
+//                    if let cell = game?.currentGeneration.livingCells[key] {
+//                        
+//                    }
                 }
             }
             
@@ -84,7 +92,7 @@ class GameScene: SKScene {
         return (x, y)
     }
     
-    private func drawScene() {
+    func drawScene() {
         // Clean up first
         for gridLine in gridLineNodes{
             gridLine.removeFromParent()
@@ -127,18 +135,21 @@ class GameScene: SKScene {
     private func drawCells(){
         let xSpacing = self.xSpacing()
         let ySpacing = self.ySpacing()
-        for cell: Cell in (game?.currentGeneration.livingCells)!.values {
-            let path = CGPathCreateMutable()
-            CGPathMoveToPoint(path, nil, CGFloat(cell.x) * xSpacing, CGFloat(cell.y) * ySpacing)
-            CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing + xSpacing, CGFloat(cell.y) * ySpacing)
-            CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing + xSpacing, CGFloat(cell.y) * ySpacing + ySpacing)
-            CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing, CGFloat(cell.y) * ySpacing + ySpacing)
-            let cellNode = SKShapeNode(path: path)
-            cellNode.name = "cell " + cell.key()
-            cellNode.fillColor = UIColor.redColor()
-            self.addChild(cellNode)
-            cellNodes.append(cellNode)
-            
+        
+        if game?.currentGeneration.livingCells.count > 0 {
+            for cell: Cell in (game?.currentGeneration.livingCells)!.values {
+                let path = CGPathCreateMutable()
+                CGPathMoveToPoint(path, nil, CGFloat(cell.x) * xSpacing, CGFloat(cell.y) * ySpacing)
+                CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing + xSpacing, CGFloat(cell.y) * ySpacing)
+                CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing + xSpacing, CGFloat(cell.y) * ySpacing + ySpacing)
+                CGPathAddLineToPoint(path, nil, CGFloat(cell.x) * xSpacing, CGFloat(cell.y) * ySpacing + ySpacing)
+                let cellNode = SKShapeNode(path: path)
+                cellNode.name = "cell " + cell.key()
+                cellNode.fillColor = UIColor.redColor()
+                self.addChild(cellNode)
+                cellNodes.append(cellNode)
+                
+            }
         }
     }
     

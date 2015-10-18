@@ -1,5 +1,21 @@
 
 
+* MVP
+    * Define level size
+    * Select staring cells (with touch)
+    * Render using spritekit
+        * animations
+    * Single screen
+    * Main controls
+        * x1
+        * start/stop
+    * Setting controls
+        * clear/seed
+        * rule 5
+        * colors
+        * grid on/off
+
+
 * GOL
     * Define board size
     * Define starting cells
@@ -24,8 +40,6 @@
 
 
 
-* MVP
-    * Define level size
-    * Select staring cells (with touch)
-    * Render using spritekit
-    * Save/Load games
+
+
+

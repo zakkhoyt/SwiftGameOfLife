@@ -15,6 +15,7 @@ final class Generation: NSObject {
     private var height: UInt
     var livingCells: Dictionary<String, Cell>
     
+    
     // MARK: public methods
     init(width: UInt, height: UInt, livingCells: Dictionary<String, Cell>) {
         self.width = width
@@ -153,10 +154,11 @@ final class Generation: NSObject {
     }
 
     private func passesRule5(cell: Cell) -> Bool {
-        if cell.age < 10 {
-            return true
-        }
-        return false
+//        if cell.age < 20 {
+//            return true
+//        }
+//        return false
+        return true
     }
     
     

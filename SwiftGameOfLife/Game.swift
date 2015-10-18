@@ -14,8 +14,8 @@ class Game: NSObject {
     var renderGenerationHandler:((Generation)->Void)?
     
     // MARK: Private member vars
-    let width: UInt
-    let height: UInt
+    var width: UInt
+    var height: UInt
     var currentGeneration: Generation
     var nextGeneration: Generation? = nil
     var generationCounter: UInt = 0
