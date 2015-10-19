@@ -16,7 +16,7 @@ final class Cell: NSObject {
     var age: UInt
 
     
-    // Mark: Public class methods
+    // MARK: Public class methods
     class func keyFor(x: UInt, y: UInt) -> String {
         return "x:\(x) y:\(y)"
     }

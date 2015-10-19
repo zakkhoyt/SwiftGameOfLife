@@ -10,7 +10,7 @@ import UIKit
 
 class Game: NSObject {
 
-    // Mark Public member vars
+    // MARK: Public member vars
     var renderGenerationHandler:((Generation)->Void)?
     
     // MARK: Private member vars

@@ -10,6 +10,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    // MARK: - Public variables
     var game: Game? = nil {
         didSet{
             xCells = (game?.width)!
@@ -17,26 +18,24 @@ class GameScene: SKScene {
         }
     }
     
-    var xCells: UInt = 1{
+    // MARK: - Private variables
+    private var xCells: UInt = 1{
         didSet{
             yCells = UInt(CGFloat(xCells) * self.frame.size.height / self.frame.size.width)
             print("x: \(xCells) y: \(yCells))")
             drawScene()
         }
     }
-    var yCells: UInt = 1
+    private var yCells: UInt = 1
     
-    var gridLineNodes: [SKNode] = []
-    var cellNodes: [SKNode] = []
+    private var gridLineNodes: [SKNode] = []
+    private var cellNodes: [SKNode] = []
+    
+    // MARK: - Override methods
 
     override func didMoveToView(view: SKView) {
-//        /* Setup your scene here */
-//        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-//        myLabel.text = "Hello, World!";
-//        myLabel.fontSize = 65;
-//        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-//        
-//        self.addChild(myLabel)
+        setupGestures()
+        showTitle()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -50,20 +49,18 @@ class GameScene: SKScene {
                     print("tapped living cell " + node.name!)
                     found = true
                     
-                    // TODO: kill cell
+                    // Kill cell
                     let index = getCellIndexAtPoint(point)
                     let key = Cell.keyFor(index.x, y: index.y)
                     game?.currentGeneration.livingCells[key] = nil
                     drawScene()
-//                    if let cell = game?.currentGeneration.livingCells[key] {
-//                        
-//                    }
                 }
             }
             
             if found == false {
                 let index = getCellIndexAtPoint(point)
-                // TODO: bring cell to life
+                
+                // Bring cell to life
                 print("no living cell found x:\(index.x) y:\(index.y)")
                 let cell = Cell(x: index.x, y: index.y)
                 game?.currentGeneration.livingCells[cell.key()] = cell
@@ -71,12 +68,49 @@ class GameScene: SKScene {
             }
         }
     }
-   
+
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+    
+    // MARK: - Public methods
+    func drawScene() {
+        // Clean up first
+        for gridLine in gridLineNodes{
+            //            let fadeAction = SKAction.fadeAlphaTo(0, duration: 0.3)
+            //            gridLine.runAction(fadeAction, completion: { () -> Void in
+            gridLine.removeFromParent()
+            //            })
+        }
+        gridLineNodes.removeAll()
+        
+        for cellNode in cellNodes{
+            
+            let fadeAction = SKAction.fadeAlphaTo(0, duration: 0.3)
+            cellNode.runAction(fadeAction, completion: { () -> Void in
+                cellNode.removeFromParent()
+            })
+            
+        }
+        cellNodes.removeAll()
+        
+        // Draw new nodes
+        drawCells()
+        
+        // Draw grid lines
+        if game?.hideGrid == false {
+            drawGrid()
+        }
+    }
+    
+    func longPress(sender: UILongPressGestureRecognizer) {
+        if sender.state == .Began {
+            print("long press. Show menu")
+        }
+    }
 
-
+    // MARK: - Private methods
+    
     private func xSpacing() -> CGFloat {
         return CGFloat(frame.size.width / CGFloat(xCells))
     }
@@ -92,24 +126,39 @@ class GameScene: SKScene {
         return (x, y)
     }
     
-    func drawScene() {
-        // Clean up first
-        for gridLine in gridLineNodes{
-            gridLine.removeFromParent()
-        }
-        for cellNode in cellNodes{
-            cellNode.removeFromParent()
+    private func showTitle() {
+        let titleNode = SKLabelNode(fontNamed:"Chalkduster")
+        titleNode.text = "Swift Game of Life";
+        titleNode.fontSize = 28;
+        //        titleNode.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+        titleNode.position = CGPoint(x:CGRectGetMidX(self.frame), y:self.frame.size.height + 100);
+        titleNode.alpha = 0
+        self.addChild(titleNode)
+        
+        let fadeInAction = SKAction.fadeAlphaTo(1.0, duration: 0.5)
+        let moveInAction = SKAction.moveTo(CGPoint(x:CGRectGetMidX(self.frame), y:self.frame.size.height - 200), duration: 0.5)
+        let inAction = SKAction.group([fadeInAction, moveInAction])
+        inAction.timingMode = .EaseOut
+        titleNode.runAction(inAction) { () -> Void in
+            titleNode.runAction(SKAction.waitForDuration(5), completion: { () -> Void in
+                
+                let fadeOutAction = SKAction.fadeAlphaTo(0.0, duration: 0.5)
+                let moveOutAction = SKAction.moveTo(CGPoint(x:CGRectGetMidX(self.frame), y:self.frame.size.height + 200), duration: 0.5)
+                let outAction = SKAction.group([fadeOutAction, moveOutAction])
+                outAction.timingMode = .EaseIn
+                titleNode.runAction(outAction, completion: { () -> Void in
+                    titleNode.removeFromParent()
+                })
+            })
         }
 
-        // Draw new nodes
-        drawCells()
-        
-        // Draw grid lines
-        if game?.hideGrid == false {
-            drawGrid()
-        }
     }
     
+    private func setupGestures() {
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPress:")
+        self.view?.addGestureRecognizer(longPressRecognizer)
+        longPressRecognizer.delegate = self
+    }
     
     private func drawGrid() {
         let xSpacing = self.xSpacing()
@@ -123,7 +172,7 @@ class GameScene: SKScene {
             self.addChild(line)
             gridLineNodes.append(line)
         }
-
+        
         let ySpacing = self.ySpacing()
         for y in 0...yCells{
             let path = CGPathCreateMutable()
@@ -161,20 +210,28 @@ class GameScene: SKScene {
                 spriteNode.name = "cell " + cell.key()
                 //self.addChild(spriteNode)
                 cellNode.addChild(spriteNode)
-
+                
                 
                 
                 
                 /* Draw just the spaceship node */
-//                let cellNode = SKSpriteNode(imageNamed: "Spaceship")
-//                cellNode.position = CGPointMake(CGFloat(cell.x) * xSpacing + xSpacing / 2.0, CGFloat(cell.y) * ySpacing + ySpacing / 2.0)
-//                cellNode.size = CGSizeMake(xSpacing, ySpacing)
-//                cellNode.name = "cell " + cell.key()
-//                self.addChild(cellNode)
-//                cellNodes.append(cellNode)
+                //                let cellNode = SKSpriteNode(imageNamed: "Spaceship")
+                //                cellNode.position = CGPointMake(CGFloat(cell.x) * xSpacing + xSpacing / 2.0, CGFloat(cell.y) * ySpacing + ySpacing / 2.0)
+                //                cellNode.size = CGSizeMake(xSpacing, ySpacing)
+                //                cellNode.name = "cell " + cell.key()
+                //                self.addChild(cellNode)
+                //                cellNodes.append(cellNode)
                 
             }
         }
     }
+
     
+
+}
+
+extension GameScene: UIGestureRecognizerDelegate {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
