@@ -16,7 +16,14 @@ class SetupViewController: SpriteViewController {
     var game: Game? = nil
     
     @IBOutlet weak var settingsView: UIView!
+    @IBOutlet weak var settingsGameView: UIVisualEffectView!
+    @IBOutlet weak var settingsPregameView: UIVisualEffectView!
+    
     @IBOutlet weak var settingsBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var gridSwitch: UISwitch!
+    @IBOutlet weak var rule5Switch: UISwitch!
+    
     
     @IBOutlet weak var showButton: UIButton!
     @IBOutlet weak var showButtonBottomLayoutConstraint: NSLayoutConstraint!
@@ -28,6 +35,7 @@ class SetupViewController: SpriteViewController {
         view.bringSubviewToFront(settingsView)
         view.bringSubviewToFront(showButton)
         setupGame()
+        setupUI()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -68,7 +76,50 @@ class SetupViewController: SpriteViewController {
         self.gameScene?.game = self.game
     }
     
-    // MARK: - IBActions
+    func setupUI() {
+        settingsGameView.alpha = 0
+        gridSwitch.on = game?.hideGrid == false
+        rule5Switch.on = game?.rule5 == true
+    }
+    
+    // MARK: - IBActions (Pregame view)
+    @IBAction func densitySliderValueChanged(sender: UISlider) {
+        //        self.gameScene?.xCells = UInt(sender.value)
+        
+        //        let width: UInt = UInt(sender.value)
+        //        let height = UInt(CGFloat(width) * view.bounds.size.height / view.bounds.size.width)
+        //        self.game?.width = width
+        //        self.game?.height = height
+        //        self.gameScene?.game = self.game
+        setupGame()
+    }
+    
+    @IBAction func gridSwitchValueChanged(sender: UISwitch!) {
+        game?.hideGrid = !sender.on
+    }
+    
+    @IBAction func rule5SwitchValueChanged(sender: UISwitch!) {
+        game?.rule5 = sender.on
+    }
+    
+    @IBAction func clearButtonTouchUpInside(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func seedButtonTouchUpInside(sender: UIButton) {
+        //        let randX = arc4random_uniform(UInt32(game?.width))
+        //        let randY =arc4random_uniform(game?.height)
+    }
+    
+    @IBAction func startGameButtonTouchUpInside(sender: AnyObject) {
+        UIView.animateWithDuration(0.3) { () -> Void in
+            self.settingsPregameView.alpha = 0;
+            self.settingsGameView.alpha = 1;
+        }
+    }
+
+    // MARK: - IBActions (Game view)
+    
     @IBAction func hideButtonTouchUpInside(sender: AnyObject) {
         settingsBottomConstraint.constant = -settingsView.bounds.size.height;
         showButtonBottomLayoutConstraint.constant = 8
@@ -93,35 +144,44 @@ class SetupViewController: SpriteViewController {
             //            self.ageLabel.text = String(format: "%lu", arguments: game?.generationCounter)
         })
         
-        //        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-        //        dispatch_after(delayTime, dispatch_get_main_queue()) {
-        //            game?.startWithRenderHander({ (currentGeneration: Generation) -> Void in
-        //                gameScene?.game = game
-        //            })
-        //        }
 
     }
 
+    @IBAction func runButtonAction(sender: AnyObject) {
+//        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+//        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            game?.startWithRenderHander({ (currentGeneration: Generation) -> Void in
+                gameScene?.game = game
+            })
+//        }
+    }
+    
 //    @IBAction func startButtonTouchUpInside(sender: AnyObject) {
 //        performSegueWithIdentifier("SegueSetupToGame", sender: game)
 //    }
     
-    @IBAction func densitySliderValueChanged(sender: UISlider) {
-//        self.gameScene?.xCells = UInt(sender.value)
-        
-//        let width: UInt = UInt(sender.value)
-//        let height = UInt(CGFloat(width) * view.bounds.size.height / view.bounds.size.width)
-//        self.game?.width = width
-//        self.game?.height = height
-//        self.gameScene?.game = self.game
-        setupGame()
+
+    @IBAction func backButtonTouchUpInside(sender: AnyObject) {
+        UIView.animateWithDuration(0.3) { () -> Void in
+            self.settingsPregameView.alpha = 1;
+            self.settingsGameView.alpha = 0;
+        }
+
     }
     
-    @IBAction func clearButtonTouchUpInside(sender: AnyObject) {
-        
-    }
-    
-    @IBAction func seedButtonTouchUpInside(sender: UIButton) {
-        
-    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

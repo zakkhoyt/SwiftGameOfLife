@@ -22,7 +22,7 @@ class GameScene: SKScene {
     private var xCells: UInt = 1{
         didSet{
             yCells = UInt(CGFloat(xCells) * self.frame.size.height / self.frame.size.width)
-            print("x: \(xCells) y: \(yCells))")
+            print("age: \(game?.generationCounter) x: \(xCells) y: \(yCells))")
             drawScene()
         }
     }
@@ -86,10 +86,10 @@ class GameScene: SKScene {
         
         for cellNode in cellNodes{
             
-            let fadeAction = SKAction.fadeAlphaTo(0, duration: 0.3)
-            cellNode.runAction(fadeAction, completion: { () -> Void in
+//            let fadeAction = SKAction.fadeAlphaTo(0, duration: 0.3)
+//            cellNode.runAction(fadeAction, completion: { () -> Void in
                 cellNode.removeFromParent()
-            })
+//            })
             
         }
         cellNodes.removeAll()

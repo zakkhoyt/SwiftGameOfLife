@@ -35,7 +35,8 @@ class Game: NSObject {
     
     func startWithRenderHander(handler: ((Generation)->Void)){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            for _: Int in 0...100 {
+//            for _: Int in 0...100 {
+            while true {
                 if(self.abort == true){
                     break
                 }

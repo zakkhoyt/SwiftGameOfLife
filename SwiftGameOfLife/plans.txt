@@ -8,12 +8,22 @@
         * emitters
     * Single screen
     * Main controls
-        * Age label
-        * Density label/slider
-        * hide/show
-        * Evolve x1
-        * start/stop
-            * speed
+        * hide/show settings pane
+
+        * Setup
+            * Density label/slider
+            * Seed
+            * clear
+            * rule 5
+            * hide grid
+
+        * GamePlay
+            * Age label
+            * Evolve x1
+            * start/stop
+                * speed
+
+
 
     * Setting controls
         * clear/seed
